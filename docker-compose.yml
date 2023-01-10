@@ -1,0 +1,12 @@
+version: "3.9"
+# We will define 2 services, web (which is the flask API) and redis. We have to be careful to network and expose the correct ports.
+# Ports go HOST:CONTAINER
+# Notice in the dockerfile we said that we would EXPOSE 5000 for flask (which is standard). I network that to port 8000 on my localhost
+# so when I go oto visit the page I need to go to 127.0.0.1/8000 (even though flask says to go to 5000... flask doesnt know it is in a container.)
+services:
+  web:
+    build: .
+    ports:
+      - "8000:5000"
+  redis:
+    image: "redis:alpine"
